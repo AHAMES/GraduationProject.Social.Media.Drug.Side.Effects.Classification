@@ -41,8 +41,20 @@ public class Crawler {
                 int count = 0;
                 for (int j = 1;j<3; j++) {
                     String url = query+ "" + j + "&query=" + requested[i];
-                    search_result = Jsoup.connect(url).get();
+                    while (true) {
+                            try {
+                             search_result = Jsoup.connect(url).get();
+                            break;
+                            }
+                            catch(IOException f){ 
+                            }
+                       
+                    }
                     Elements posts = search_result.getElementsByClass("result");
+                    if(posts.isEmpty())
+                    {
+                        break;
+                    }
                     for (Element item : posts) {
                         
                         Elements user = item.getElementsByClass("title");
@@ -84,7 +96,11 @@ public class Crawler {
                                              }
                                     }
                                 }
-                                
+                                if (!currentItem.userAge.equals(""))
+                                {
+                                    currentItem.userAge=Integer.toString(Integer.parseInt(currentItem.userAge)-
+                                            (2019-Integer.parseInt(currentItem.yearPosted)));
+                                }
                                 
                                 currentItem.description = description.text();
                                 currentItem.subject = requested[i];
