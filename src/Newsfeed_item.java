@@ -17,6 +17,7 @@ public class Newsfeed_item {
     String userGender;
     String userAge;
     String joiningYear;
+    String yearPosted;
     String replysLink;
     ArrayList<Reply> replies;
 

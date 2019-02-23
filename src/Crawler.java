@@ -57,6 +57,9 @@ public class Crawler {
                                 Elements userInfo=reply_result.getElementsByClass("subj_info");
                                 Element userLink = userInfo.get(0).getElementsByClass("username").get(0).getElementsByTag("a").get(0);
                                 
+                                Elements timeStamps=reply_result.getElementsByClass("mh_timestamp");
+                                String timestamp=timeStamps.attr("datetime");
+                                currentItem.yearPosted=timestamp.split("-")[0];
                                 Document userInfo_result = Jsoup.connect(userLink.attr("abs:href")).get();
                                 Element aboutMe=userInfo_result.getElementsByClass("section").get(0);
                                 String[] info;
@@ -140,7 +143,7 @@ public class Crawler {
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("posts.csv"), "UTF-8"));
             StringBuilder oneLine = new StringBuilder();
-            oneLine.append("Drug,Content,Joined,Age,Gender");
+            oneLine.append("Drug,Content,Joined,Posted,Age,Gender");
             bw.write(oneLine.toString());
             bw.newLine();
             for (Newsfeed_item product : productList) {
@@ -150,6 +153,8 @@ public class Crawler {
                 oneLine.append(product.description.replaceAll(",", ";"));
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(product.joiningYear);
+                oneLine.append(CSV_SEPARATOR);
+                oneLine.append(product.yearPosted);
                 oneLine.append(CSV_SEPARATOR);
                 oneLine.append(product.userAge);
                 oneLine.append(CSV_SEPARATOR);
