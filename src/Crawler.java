@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
@@ -32,31 +33,33 @@ public class Crawler {
 
     public static void main(String args[]) throws JSONException, IOException {
         Document search_result;
-        String requested[] = new String[]{"aspirin", "Fentanyl"};
+        String requested[] = new String[]{"Metformin+diabetes+type+2",
+            "Amlodipine+hypertension",
+            "Diltiazem+hypertension",
+            "Hydrochlorothiazide+hypertension",
+            "Atenolol+hypertension"};
         ArrayList<Newsfeed_item> threads = new ArrayList();
         String query = "https://www.medhelp.org/search/expanded?cat=posts&page=";
         //https://www.medhelp.org/search/expanded?cat=posts&page=1&query=Fentanyl
         try {
             for (int i = 0; i < requested.length; i++) {
                 int count = 0;
-                for (int j = 1;j<3; j++) {
-                    String url = query+ "" + j + "&query=" + requested[i];
+                for (int j = 1;/*j<3*/; j++) {
+                    String url = query + "" + j + "&query=" + requested[i];
                     while (true) {
-                            try {
-                             search_result = Jsoup.connect(url).get();
+                        try {
+                            search_result = Jsoup.connect(url).get();
                             break;
-                            }
-                            catch(IOException f){ 
-                            }
-                       
+                        } catch (IOException f) {
+                        }
+
                     }
                     Elements posts = search_result.getElementsByClass("result");
-                    if(posts.isEmpty())
-                    {
+                    if (posts.isEmpty()) {
                         break;
                     }
                     for (Element item : posts) {
-                        
+
                         Elements user = item.getElementsByClass("title");
                         Elements link = user.get(0).getElementsByTag("a");
                         Newsfeed_item currentItem = new Newsfeed_item();
@@ -66,62 +69,62 @@ public class Crawler {
                             try {
                                 Document reply_result = Jsoup.connect(currentItem.replysLink).get();
                                 Element description = reply_result.getElementById("subject_msg");
-                                Elements userInfo=reply_result.getElementsByClass("subj_info");
+                                Elements userInfo = reply_result.getElementsByClass("subj_info");
                                 Element userLink = userInfo.get(0).getElementsByClass("username").get(0).getElementsByTag("a").get(0);
-                                
-                                Elements timeStamps=reply_result.getElementsByClass("mh_timestamp");
-                                String timestamp=timeStamps.attr("datetime");
-                                currentItem.yearPosted=timestamp.split("-")[0];
+
+                                Elements timeStamps = reply_result.getElementsByClass("mh_timestamp");
+                                String timestamp = timeStamps.attr("datetime");
+                                currentItem.yearPosted = timestamp.split("-")[0];
                                 Document userInfo_result = Jsoup.connect(userLink.attr("abs:href")).get();
-                                Element aboutMe=userInfo_result.getElementsByClass("section").get(0);
+                                Element aboutMe = userInfo_result.getElementsByClass("section").get(0);
                                 String[] info;
                                 info = aboutMe.text().split("[:\\;\\ \\,]");
-                                for (String in:info)
-                                {
-                                    try{
-                                        int number=Integer.parseInt(in);
-                                        if(number<1000)
-                                        {
-                                            currentItem.userAge=String.valueOf(number);
+                                for (String in : info) {
+                                    try {
+                                        int number = Integer.parseInt(in);
+                                        if (number < 1000) {
+                                            currentItem.userAge = String.valueOf(number);
+                                        } else {
+                                            currentItem.joiningYear = String.valueOf(number);
                                         }
-                                        else{
-                                            currentItem.joiningYear=String.valueOf(number);
+                                    } catch (Exception e) {
+                                        if (in.equals("Male") || in.equals("Female")) {
+                                            currentItem.userGender = in;
                                         }
                                     }
-                                    catch (Exception e)
-                                    {
-                                             if(in.equals("Male") || in.equals("Female"))
-                                             {
-                                                 currentItem.userGender=in;
-                                             }
-                                    }
                                 }
-                                if (!currentItem.userAge.equals(""))
-                                {
-                                    currentItem.userAge=Integer.toString(Integer.parseInt(currentItem.userAge)-
-                                            (2019-Integer.parseInt(currentItem.yearPosted)));
+                                if (!currentItem.userAge.equals("")) {
+                                    currentItem.userAge = Integer.toString(Integer.parseInt(currentItem.userAge)
+                                            - (2019 - Integer.parseInt(currentItem.yearPosted)));
                                 }
-                                
+
                                 currentItem.description = description.text();
                                 currentItem.subject = requested[i];
                                 System.out.println((count++) + ":" + currentItem);
                                 threads.add(currentItem);
                                 break;
                             } catch (HttpStatusException e) {
-                                System.out.println("Ignore this post");
+                                System.out.println("Ignore this post" + currentItem.replysLink);
+                                break;
+                            } catch (IndexOutOfBoundsException e3) {
+                                System.out.println("Ignore this post" + currentItem.replysLink);
                                 break;
                             } catch (SocketTimeoutException e2) {
+
                                 System.out.println("Connection Timeout");
                                 if (tries++ == 3) {
                                     break;
                                 }
+                            } catch (java.net.ConnectException ex2) {
+                                System.out.println("Connection timeout, writting To CSV file for backup");
+                                writeToCSV(threads);
                             }
                         }
                     }
-                    
-                    if (count == 20) {
+
+                    /*if (count == 20) {
                         break;
-                    }
+                    }*/
                 }
 
             }
@@ -129,9 +132,15 @@ public class Crawler {
             System.out.println(threads.size());
             writeToCSV(threads);
         } catch (IOException ex) {
-            Logger.getLogger(Crawler.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex);
+            System.out.println("IOException, writting To CSV file for backup");
+            writeToCSV(threads);
+            
+        } catch (Exception ex2) {
+            System.out.println(ex2);
+            System.out.println("Connection timeout, writting To CSV file for backup");
+            writeToCSV(threads);
         }
-
     }
 
     public static String jsonGetRequest(String urlQueryString) {
