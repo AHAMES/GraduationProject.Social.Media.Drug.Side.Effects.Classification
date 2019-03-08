@@ -33,11 +33,14 @@ public class Crawler {
 
     public static void main(String args[]) throws JSONException, IOException {
         Document search_result;
-        String requested[] = new String[]{"Metformin+diabetes+type+2",
+        String requested[] = new String[]{
+            "Lisinopril+hypertension",
+            "Nadolol+hypertension"
+            /*"Metformin+diabetes+type+2",
             "Amlodipine+hypertension",
             "Diltiazem+hypertension",
             "Hydrochlorothiazide+hypertension",
-            "Atenolol+hypertension"};
+            "Atenolol+hypertension"*/};
         ArrayList<Newsfeed_item> threads = new ArrayList();
         String query = "https://www.medhelp.org/search/expanded?cat=posts&page=";
         //https://www.medhelp.org/search/expanded?cat=posts&page=1&query=Fentanyl
