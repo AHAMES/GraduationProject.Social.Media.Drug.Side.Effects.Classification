@@ -19,7 +19,7 @@ posts= pandas.read_csv('Calcium.csv')
 
 
 stop_words =  set(stopwords.words('english'))
-for i in range(0,len(posts)-1):
+for i in range(0,len(posts)):
     
     newSentence =""
     sentence=posts.iloc[i]['Content']

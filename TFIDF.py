@@ -24,7 +24,7 @@ vectorizer2 = TfidfVectorizer()
 listOfPosts=posts.iloc[:]['Filtered']
 listOfPosts2=posts.iloc[:]['Stemmed']
 TFIDF=vectorizer.fit_transform(listOfPosts)
-TFIDF2=vectorizer2.fit_transform(listOfPosts)
+TFIDF2=vectorizer2.fit_transform(listOfPosts2)
 
 print (vectorizer.get_feature_names())
 
