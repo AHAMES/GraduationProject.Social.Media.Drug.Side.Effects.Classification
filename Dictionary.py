@@ -7,7 +7,8 @@ Created on Fri Mar  8 14:44:37 2019
 
 
 import pandas
-from nltk.tokenize import word_tokenize 
+from nltk.tokenize import word_tokenize
+import string
 
 calcium_Disease_Dictionary ={
         "abcess":["ABSCESS"],
@@ -239,53 +240,82 @@ posts= pandas.read_csv('Calcium.csv')
 listOfPosts1=posts.iloc[:]['Stemmed']
 listOfPosts2=posts.iloc[:]['Filtered']
 
-for i in range(0,len(listOfPosts1)):
-    word_tokens1 = word_tokenize(listOfPosts1[i])
-    word_tokens2 = word_tokenize(listOfPosts2[i])
-    ADRList=[]
-    MentalList=[]
-    DiseaseList=[]
-    for j in word_tokens1:
-        if j in calcium_ADR_Dictionary:
-            for k in calcium_ADR_Dictionary[j]:
-                if k not in ADRList:
-                    ADRList.append(k)
-                    break
-        if j in calcium_Mental_Dysfunction_Dictionary:
-            for k in calcium_Mental_Dysfunction_Dictionary[j]:
-                if k not in MentalList:
-                    MentalList.append(k)
-                    break
-        if j in calcium_Disease_Dictionary:
-            for k in calcium_Disease_Dictionary[j]:
-                if k not in DiseaseList:
-                    DiseaseList.append(k)
-                    break
+def pressure():
+    for i in range(0,len(posts)):
+        newSentence =""
+        sentence=posts.iloc[i]['Content']
+        for k in sentence:
+            if (k.isalpha()) or k.isdigit() or k==' ' or k=="/":
+                newSentence=newSentence+k
+                continue
+            else:
+                newSentence=newSentence+" " 
+                continue
+        word_tokens = word_tokenize(newSentence)
+        presure=[]
+        for w in word_tokens: 
+            if ('/' in w ):
+                if (any(c.isalpha() for c in w))==False:
+                    presure.append(w)
+            filtered=' '.join(map(str,presure)) 
+            filtered=filtered.translate(None, string.punctuation)
+            #posts.at[i ,'Filtered'] = filtered
+        print presure
+        print ""
+            
+def mentions():
+    
+    '''Stemmed'''
+    ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    for i in range(0,len(listOfPosts1)):
+        word_tokens1 = word_tokenize(listOfPosts1[i])
+        word_tokens2 = word_tokenize(listOfPosts2[i])
+        ADRList=[]
+        MentalList=[]
+        DiseaseList=[]
+        for j in word_tokens1:
+            if j in calcium_ADR_Dictionary:
+                for k in calcium_ADR_Dictionary[j]:
+                    if k not in ADRList:
+                        ADRList.append(k)
+                        break
+            if j in calcium_Mental_Dysfunction_Dictionary:
+                for k in calcium_Mental_Dysfunction_Dictionary[j]:
+                    if k not in MentalList:
+                        MentalList.append(k)
+                        break
+            if j in calcium_Disease_Dictionary:
+                for k in calcium_Disease_Dictionary[j]:
+                    if k not in DiseaseList:
+                        DiseaseList.append(k)
+                        break
                 
-    for j in word_tokens2:
-        if j in calcium_ADR_Dictionary:
-            for k in calcium_ADR_Dictionary[j]:
-                if k not in ADRList:
-                    ADRList.append(k)
-                    break
-        if j in calcium_Mental_Dysfunction_Dictionary:
-            for k in calcium_Mental_Dysfunction_Dictionary[j]:
-                if k not in MentalList:
-                    MentalList.append(k)
-                    break
-        if j in calcium_Disease_Dictionary:
-            for k in calcium_Disease_Dictionary[j]:
-                if k not in DiseaseList:
-                    DiseaseList.append(k)  
-                    break
-    posts.at[i,'ADRCount']=len(ADRList)
-    posts.at[i,'DieaseCount']=len(MentalList)
-    posts.at[i,'MentalCount']=len(DiseaseList)
-    #if len(ADRList)==0:
-        #posts.at[i,'ADRs']=ADRList
-    #if len(MentalList)==0:     
-        #posts.at[i,'Dieases']=MentalList
-    #if len(DiseaseList)==0:    
-        #posts.at[i,'Mentals']=DiseaseList
+                '''Filtered'''
+                ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+            for j in word_tokens2:
+                if j in calcium_ADR_Dictionary:
+                    for k in calcium_ADR_Dictionary[j]:
+                        if k not in ADRList:
+                            ADRList.append(k)
+                            break
+                if j in calcium_Mental_Dysfunction_Dictionary:
+                    for k in calcium_Mental_Dysfunction_Dictionary[j]:
+                        if k not in MentalList:
+                            MentalList.append(k)
+                            break
+                if j in calcium_Disease_Dictionary:
+                    for k in calcium_Disease_Dictionary[j]:
+                        if k not in DiseaseList:
+                            DiseaseList.append(k)  
+                            break
+        posts.at[i,'ADRCount']=len(ADRList)
+        posts.at[i,'DieaseCount']=len(MentalList)
+        posts.at[i,'MentalCount']=len(DiseaseList)
+        #if len(ADRList)==0:
+            #posts.at[i,'ADRs']=ADRList
+        #if len(MentalList)==0:     
+            #posts.at[i,'Dieases']=MentalList
+        #if len(DiseaseList)==0:    
+            #posts.at[i,'Mentals']=DiseaseList
 
-posts.to_csv('Calcium.csv')
+    posts.to_csv('Calcium.csv')
