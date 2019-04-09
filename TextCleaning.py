@@ -15,7 +15,7 @@ from nltk.stem import PorterStemmer
 stemmer = PorterStemmer()
 vectorizer = CountVectorizer()
 
-posts= pandas.read_csv('Calcium.csv')
+posts= pandas.read_csv('CurrentPosts.csv')
 
 
 stop_words =  set(stopwords.words('english'))
@@ -51,4 +51,4 @@ bagOfWords = vectorizer.fit(listOfPosts.tolist())
 bagOfWords = vectorizer.transform(listOfPosts.tolist())
 #print bagOfWords
 
-posts.to_csv('Calcium.csv')
+posts.to_csv('CurrentPosts.csv')
