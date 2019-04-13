@@ -521,19 +521,48 @@ age_related_list=[
       'years',
       'year',
       'yrs',
+      'yr',
       'old',
       'yo',
       'am',
-      "'m",
-      "a"
+      "m",
+      "a",
+      "of",
+      "now",
+      'y/o',
+      "im",
+      "Im",
+      "is",
+      "at"
 ]
+
+drugList={
+        "Nadolol+hypertension":["Nadolol","Beta"],
+        "Amlodipine+hypertension":["Amlodipine","Calcium"],
+        "Diltiazem+hypertension":["Diltiazem","Calcium"],
+        "Hydrochlorothiazide+hypertension":["Hydrochlorothiazide",""],
+        "Atenolol+hypertension":["Atenolol","Beta"],
+        "Lisinopril+hypertension":["Lisinopril","Angiotensin"],
+}
 
 posts= pandas.read_csv('CurrentPosts.csv')
 
 listOfPosts1=posts.iloc[:]['Stemmed']
 listOfPosts2=posts.iloc[:]['Filtered']
-
-
+for i in posts.columns:
+    if "Unnamed" in i:
+        posts=posts.drop(columns=[i])
+def drugs():
+    for i in range(0,len(posts)):
+        drug= posts.iloc[i]['Drug']
+        if drug in drugList:
+            drug= posts.iloc[i]['Drug']
+            drugfamily=drugList[drug][1]
+            posts.at[i,'DrugFamily']=drugfamily
+            posts.at[i,'Drug']=drugList[drug][0]
+        
+        
+    posts.to_csv('CurrentPosts.csv')
 def pressure():
     for i in range(0,len(posts)):
         newSentence =""
@@ -564,6 +593,7 @@ def age():
     
     file_object2  = open("age.txt", "w")
     j=0
+    
     for i in range(0,len(posts)):
         
         newSentence =""
@@ -577,22 +607,32 @@ def age():
                 continue
         word_tokens = word_tokenize(newSentence)
         
+        
+        x=any(char.isdigit() for char in word_tokens[0])
+        y=('/' not in word_tokens[0])
+        z=(word_tokens[1] in age_related_list)
+        b=(any(w in word_tokens[0] for w in age_related_list))
+            
         age=[]
+        if (x and y and (z or b)):
+            age.append(word_tokens[0])
         for k in range(1,len(word_tokens)-1): 
             x=any(char.isdigit() for char in word_tokens[k])
             y=('/' not in word_tokens[k])
             z=(word_tokens[k-1] in age_related_list)
             a=(word_tokens[k+1] in age_related_list)
             b=(any(w in word_tokens[k] for w in age_related_list))
-            
-            if (x and y and (z or a or b)):
+            c=('mg' not in word_tokens[k+1])
+            d=('mg' not in word_tokens[k-1])
+            e=('mg' not in word_tokens[k])
+            if (x and y and (z or a or b) and c and d and e):
                 file_object2.write(str(j)+": "+word_tokens[k]+" "+str(x)+" "+str(y)+" "+str(z)+" "+str(a)+" "+str(b)+'\n')
-                age.append(int(re.search(r'\d+', word_tokens[k]).group()))
+                age.append(word_tokens[k-1]+word_tokens[k]+word_tokens[k+1])
             filtered=' '.join(map(str,age)) 
             filtered=filtered.translate(None, string.punctuation)
             
             #posts.at[i ,'Filtered'] = filtered
-        posts.at[j,'years']= str(age)
+        posts.at[j,'years1']= str(age)
         j+=1
        
         #print ""
@@ -673,7 +713,7 @@ def features():
                 else:
                     posts.at[i,k]="0"
     posts.to_csv('CurrentPosts.csv')
-features()
+#features()
 #mentions()
 #age()
 #pressure()
