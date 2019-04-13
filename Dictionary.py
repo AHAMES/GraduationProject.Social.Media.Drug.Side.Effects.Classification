@@ -537,12 +537,12 @@ age_related_list=[
 ]
 
 drugList={
-        "Nadolol+hypertension":["Nadolol","Beta"],
-        "Amlodipine+hypertension":["Amlodipine","Calcium"],
-        "Diltiazem+hypertension":["Diltiazem","Calcium"],
-        "Hydrochlorothiazide+hypertension":["Hydrochlorothiazide",""],
-        "Atenolol+hypertension":["Atenolol","Beta"],
-        "Lisinopril+hypertension":["Lisinopril","Angiotensin"],
+        "Nadolol":["Nadolol","Beta"],
+        "Amlodipine":["Amlodipine","Calcium"],
+        "Diltiazem":["Diltiazem","Calcium"],
+        "Hydrochlorothiazide":["Hydrochlorothiazide","Diuretics"],
+        "Atenolol":["Atenolol","Beta"],
+        "Lisinopril":["Lisinopril","Angiotensin"],
 }
 
 posts= pandas.read_csv('CurrentPosts.csv')
@@ -700,6 +700,38 @@ def mentions():
         # js = json.loads(posts.at[i,'ADRs'])
         # str(js[j])
 
+    posts.to_csv('CurrentPosts.csv')
+def height():
+    for i in range(0,len(posts)):
+        
+        newSentence =""
+        sentence=posts.iloc[i]['Content']
+        height=[[],[]]
+        ch=""
+        isHeight=False
+        for k in range(0,len(sentence)):
+            if sentence[k].isdigit():
+                isHeight=True
+            if isHeight==True and (sentence[k].isdigit() or sentence[k]=="'" or sentence[k]=="\"" or sentence[k]=="-"):
+                ch+=sentence[k]
+            elif isHeight==True and not (sentence[k].isdigit() or sentence[k]=="'" or sentence[k]=="\"" or sentence[k]=="-"):
+                isHeight=False
+                
+                if "\"" in ch or "'"in ch:
+                    height[0].append(ch)
+                
+                ch=""
+            if (sentence[k].isalpha()) or sentence[k].isdigit() or sentence[k]==' ' or sentence[k]=="/":
+                newSentence=newSentence+sentence[k]
+                continue
+            else:
+                newSentence=newSentence+" " 
+                continue
+        word_tokens = word_tokenize(newSentence)
+        posts.at[i,'heights']=str(height)
+        
+       
+        #print ""
     posts.to_csv('CurrentPosts.csv')
 def features():
     for i in calcium_ADR_Dictionary:
