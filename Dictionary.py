@@ -9,6 +9,7 @@ Created on Fri Mar  8 14:44:37 2019
 import pandas
 from nltk.tokenize import word_tokenize
 import string
+import ast
 import re
 import json
 calcium_Disease_Dictionary ={
@@ -745,6 +746,16 @@ def features():
                 else:
                     posts.at[i,k]="0"
     posts.to_csv('CurrentPosts.csv')
+def feetToCM():
+    for i in range(0,len(posts)):
+        feet=posts.iloc[i]['Inches']
+        feet=ast.literal_eval(feet)[0]
+        if len(feet)!=0:
+            feet=feet[0].split('-')
+            cm=30.48*int(feet[0])+ 2.54*int(feet[1])
+            posts.at[i,"Height"]=int(cm)
+    posts.to_csv('CurrentPosts.csv')
+#feetToCM()
 #features()
 #mentions()
 #age()
