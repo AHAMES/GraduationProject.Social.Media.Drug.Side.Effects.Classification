@@ -2178,7 +2178,6 @@ cario
 cariologist
 carnitin
 carol
-carolyn
 carotid
 carpal
 carpet
@@ -3363,7 +3362,6 @@ dose
 doseag
 dostinex
 dot
-dotanoc
 dotat
 dotatt
 doubl
@@ -3673,7 +3671,6 @@ enter
 enterpris
 entertain
 enthroat
-enthusiasm
 entir
 entiti
 entranc
@@ -4727,7 +4724,6 @@ heve
 hevi
 hey
 hfh
-hfhsm
 hg
 hgb
 hgh
@@ -6216,7 +6212,6 @@ monument
 mood
 moodi
 moon
-moonka
 mopey
 moratorium
 morbid
@@ -6485,7 +6480,6 @@ nioxin
 nip
 nippl
 nite
-nitrat
 nitric
 nitril
 nitro
@@ -7606,7 +7600,6 @@ qualifi
 qualit
 qualiti
 qualtiy
-quaniti
 quant
 quantita
 quart
@@ -8177,7 +8170,6 @@ sckan
 scleroderma
 sclerosi
 sclerot
-sclerotherapi
 scoliosi
 scoop
 scope

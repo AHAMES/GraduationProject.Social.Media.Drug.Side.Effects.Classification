@@ -12,6 +12,8 @@ import string
 import ast
 import re
 import json
+from sklearn.feature_extraction.text import TfidfVectorizer
+
 calcium_Disease_Dictionary ={
     'AD':['Alzheimer disease , familial , type 3 '],
     'CH':['Cyclic neutropenia '],
@@ -304,7 +306,6 @@ calcium_Disease_Dictionary ={
     'ulcer':['Ulcer '],
     'urticaria':['Urticaria '],
     'uti':['Urinary tract infection '],
-    'v':['V'],
     'varic':['Varicosity '],
     'varix':['Varicosity '],
     'vascul':['Vasculitis '],
@@ -318,66 +319,65 @@ calcium_Disease_Dictionary ={
 }
 
 calcium_Mental_Dysfunction_Dictionary ={
-    'abus':['Drug abuse '],
-    'addict':['Addictive Behavior '],
-    'adhd':['Attention deficit hyperactivity disorder '],
-    'agoraphobia':['Agoraphobia '],
-    'alcohol':['Alcoholic Intoxication , Chronic '],
-    'analgesia':['Agnosia for Pain '],
-    'anxieti':['Anxiety ', 'Anxiety Disorders '],
-    'anxiou':['Anxiety '],
-    'anxious':['Anxiety '],
-    'apathi':['Apathy '],
-    'aphasia':['Aphasia '],
-    'asd':['Autism Spectrum Disorders '],
-    'autism':['Autistic Disorder '],
-    'bing':['Binge eating disorder '],
-    'blackout':['Alcoholic blackout '],
+    'abus':['Drug abuse'],
+    'addict':['Addictive Behavior'],
+    'adhd':['Attention deficit hyperactivity disorder'],
+    'agoraphobia':['Agoraphobia'],
+    'alcohol':['Alcoholic Intoxication , Chronic'],
+    'analgesia':['Agnosia for Pain'],
+    'anxieti':['Anxiety', 'Anxiety Disorders'],
+    'anxiou':['Anxiety'],
+    'anxious':['Anxiety'],
+    'apathi':['Apathy'],
+    'aphasia':['Aphasia'],
+    'asd':['Autism Spectrum Disorders'],
+    'autism':['Autistic Disorder'],
+    'bing':['Binge eating disorder'],
+    'blackout':['Alcoholic blackout'],
     'block':['Mental blocking '],
-    'caffein':['Caffeine related disorders '],
-    'confus':['Confusion '],
-    'daze':['Confusion '],
-    'depress':['Mental Depression ', 'Depressive disorder '],
+    'caffein':['Caffeine related disorders'],
+    'confus':['Confusion'],
+    'daze':['Confusion'],
+    'depress':['Mental Depression ', 'Depressive disorder'],
     'dereal':['Derealization'],
-    'despond':['despondency '],
-    'disori':['Disorientation '],
-    'disorient':['Confusion ', 'Disorientation '],
-    'drowsi':['Somnolence '],
-    'drunk':['Alcoholic Intoxication ', 'Acute alcoholic intoxication '],
-    'dysthymia':['Dysthymic Disorder '],
-    'enuresi':['Bedwetting '],
+    'despond':['despondency'],
+    'disori':['Disorientation'],
+    'disorient':['Confusion', 'Disorientation'],
+    'drowsi':['Somnolence'],
+    'drunk':['Alcoholic Intoxication', 'Acute alcoholic intoxication'],
+    'dysthymia':['Dysthymic Disorder'],
+    'enuresi':['Bedwetting'],
     'flash':['Flashing'],
-    'flashback':['Hallucinogen Persisting Perception Disorder '],
+    'flashback':['Hallucinogen Persisting Perception Disorder'],
     'forget':['forgetting ', 'Forgetting'],
     'frenzi':['Frenzy'],
-    'gad':['Generalized Anxiety Disorder '],
-    'hallucin':['Hallucinations '],
-    'hyper':['Hyperactive behavior '],
+    'gad':['Generalized Anxiety Disorder'],
+    'hallucin':['Hallucinations'],
+    'hyper':['Hyperactive behavior'],
     'hypervigil':['Hypervigilance'],
-    'hypochondria':['Hypochondriasis '],
+    'hypochondria':['Hypochondriasis'],
     'icd':['Disruptive , Impulse Control , and Conduct Disorders '],
     'impati':['Impatience'],
     'manic':['Manic'],
-    'mci':['Mild cognitive disorder '],
-    'mdi':['MAJOR AFFECTIVE DISORDER 2 '],
-    'moodi':['Mood swings '],
-    'neurosi':['Neurotic Disorders '],
+    'mci':['Mild cognitive disorder'],
+    'mdi':['MAJOR AFFECTIVE DISORDER 2'],
+    'moodi':['Mood swings'],
+    'neurosi':['Neurotic Disorders'],
     'nightmar':['Nightmare', 'Nightmares'],
-    'obsess':['Obsessions '],
-    'ocd':['Obsessive-Compulsive Personality ', 'Obsessive-Compulsive Disorder '],
-    'person':['As If Personality '],
-    'phobia':['Phobic anxiety disorder '],
-    'pot':['Marijuana Abuse '],
-    'psych':['Psychiatric problem '],
-    'psycholog':['Psychiatric problem '],
+    'obsess':['Obsessions'],
+    'ocd':['Obsessive-Compulsive Personality', 'Obsessive-Compulsive Disorder'],
+    'phobia':['Phobic anxiety disorder'],
+    'pot':['Marijuana Abuse'],
+    'psych':['Psychiatric problem'],
+    'psycholog':['Psychiatric problem'],
     'psychot':['Psychotic'],
-    'ptsd':['Post-Traumatic Stress Disorder '],
+    'ptsd':['Post-Traumatic Stress Disorder'],
     'pund':['Punding'],
-    'schizophrenia':['Schizophrenia '],
-    'sleepi':['Somnolence '],
-    'somat':['Somatization '],
-    'somnol':['Somnolence '],
-    'spray':['Spraying behavior '],
+    'schizophrenia':['Schizophrenia'],
+    'sleepi':['Somnolence'],
+    'somat':['Somatization'],
+    'somnol':['Somnolence'],
+    'spray':['Spraying behavior'],
     'ssd':['Speech Sound Disorders'],
     'stubborn':['Stubbornness'],
     'suffer':['Mental Suffering'],
@@ -493,7 +493,7 @@ calcium_ADR_Dictionary ={
     'spasm':['Muscle Cramp', 'Spasm', 'Spasm'],
     'spastic':['Muscle Spasticity'],
     'spell':['spells'],
-    'spot':['Exanthema ', 'Spots on skin ', 'Menstrual spotting'],
+    'spot':['Exanthema ', 'Spots on skin '],
     'stagger':['Staggering gait'],
     'stiff':['Muscular stiffness'],
     'suffoc':['Suffocated'],
@@ -548,8 +548,8 @@ drugList={
 
 posts= pandas.read_csv('CurrentPosts.csv')
 
-listOfPosts1=posts.iloc[:]['Stemmed']
-listOfPosts2=posts.iloc[:]['Filtered']
+#listOfPosts1=posts.iloc[:]['Stemmed']
+#listOfPosts2=posts.iloc[:]['Filtered']
 for i in posts.columns:
     if "Unnamed" in i:
         posts=posts.drop(columns=[i])
@@ -649,11 +649,17 @@ def mentions():
         ADRList=[]
         MentalList=[]
         DiseaseList=[]
+        if (i==70):
+            print "spot"
         for j in word_tokens1:
+            
             if j in calcium_ADR_Dictionary:
                 for k in calcium_ADR_Dictionary[j]:
                     if k not in ADRList:
+                        
+                            
                         ADRList.append(k)
+                        
                         break
             if j in calcium_Mental_Dysfunction_Dictionary:
                 for k in calcium_Mental_Dysfunction_Dictionary[j]:
@@ -668,22 +674,22 @@ def mentions():
                 
                 '''Filtered'''
                 ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-            for j in word_tokens2:
-                if j in calcium_ADR_Dictionary:
-                    for k in calcium_ADR_Dictionary[j]:
-                        if k not in ADRList:
-                            ADRList.append(k)
-                            break
-                if j in calcium_Mental_Dysfunction_Dictionary:
-                    for k in calcium_Mental_Dysfunction_Dictionary[j]:
-                        if k not in MentalList:
-                            MentalList.append(k)
-                            break
-                if j in calcium_Disease_Dictionary:
-                    for k in calcium_Disease_Dictionary[j]:
-                        if k not in DiseaseList:
-                            DiseaseList.append(k)  
-                            break
+        for j in word_tokens2:
+            if j in calcium_ADR_Dictionary:
+                for k in calcium_ADR_Dictionary[j]:
+                    if k not in ADRList:
+                        ADRList.append(k)
+                        break
+            if j in calcium_Mental_Dysfunction_Dictionary:
+                for k in calcium_Mental_Dysfunction_Dictionary[j]:
+                    if k not in MentalList:
+                        MentalList.append(k)
+                        break
+            if j in calcium_Disease_Dictionary:
+                for k in calcium_Disease_Dictionary[j]:
+                    if k not in DiseaseList:
+                        DiseaseList.append(k)  
+                        break
         posts.at[i,'ADRCount']=len(ADRList)
         posts.at[i,'MentalCount']=len(MentalList)
         posts.at[i,'DieaseCount']=len(DiseaseList)
@@ -737,11 +743,32 @@ def height():
 def features():
     for i in calcium_ADR_Dictionary:
         for j in calcium_ADR_Dictionary[i]:
-            posts.at[0,j]=""
+            posts.at[0,j]=0
     for i in range(0,len(posts)):
         for j in calcium_ADR_Dictionary:
             for k in calcium_ADR_Dictionary[j]:
                 if k in posts.at[i,'ADRs']:
+                    posts.at[i,k]="1"
+                else:
+                    posts.at[i,k]="0"
+    for i in calcium_Disease_Dictionary:
+        for j in calcium_Disease_Dictionary[i]:
+            posts.at[0,j]=0
+    for i in range(0,len(posts)):
+        for j in calcium_Disease_Dictionary:
+            for k in calcium_Disease_Dictionary[j]:
+                if k in posts.at[i,'Dieases']:
+                    posts.at[i,k]="1"
+                else:
+                    posts.at[i,k]="0"     
+    for i in calcium_Mental_Dysfunction_Dictionary:
+        for j in calcium_Mental_Dysfunction_Dictionary[i]:
+            posts.at[0,j]=0
+        
+    for i in range(0,len(posts)):
+        for j in calcium_Mental_Dysfunction_Dictionary:
+            for k in calcium_Mental_Dysfunction_Dictionary[j]:
+                if k in posts.at[i,'Mentals']:
                     posts.at[i,k]="1"
                 else:
                     posts.at[i,k]="0"
@@ -755,8 +782,114 @@ def feetToCM():
             cm=30.48*int(feet[0])+ 2.54*int(feet[1])
             posts.at[i,"Height"]=int(cm)
     posts.to_csv('CurrentPosts.csv')
+    
+def TFIDF():
+    
+    vectorizer = TfidfVectorizer()
+    #listOfPosts=posts.iloc[:]['Filtered']
+    listOfPosts2=posts.iloc[:]['Stemmed']
+    bagOfWords = vectorizer.fit(listOfPosts2.tolist())
+    bagOfWords = vectorizer.transform(listOfPosts2.tolist())
+    df=pandas.DataFrame(bagOfWords.toarray(),columns=vectorizer.get_feature_names())
+    dfadr=pandas.DataFrame()
+    dfdisease=pandas.DataFrame()
+    dfmental=pandas.DataFrame()
+    for i in vectorizer.get_feature_names():
+        if i in calcium_ADR_Dictionary:
+            dfadr=dfadr.join(df[i])
+            dfadr[i]=df[i]
+            print i
+        
+        if i in calcium_Disease_Dictionary:
+            dfdisease=dfdisease.join(df[i])
+            dfdisease[i]=df[i]
+            print i
+        
+        elif i in calcium_Mental_Dysfunction_Dictionary:
+            dfmental=dfmental.join(df[i])
+            dfmental[i]=df[i] 
+            print i
+        else:
+            del df[i]
+        
+    
+    dfadr.to_csv('ADR_TFIDF.csv')
+    dfdisease.to_csv('disease_TFIDF.csv')
+    dfmental.to_csv('mental_TFIDF.csv')
+    df.to_csv("TOTAL_TFIDF.csv")
+    return  [vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental]
+
+
+def TFIDF2():
+    
+    vectorizer = TfidfVectorizer()
+    ADRs=posts.iloc[:]['ADRs']
+    #Mentals=posts.iloc[:]['Mentals']
+    #Dieases=posts.iloc[:]['Dieases']
+    bagOfWords = vectorizer.fit(ADRs.tolist())
+    bagOfWords = vectorizer.transform(ADRs.tolist())
+    df=pandas.DataFrame(bagOfWords.toarray(),columns=vectorizer.get_feature_names())
+    dfadr=pandas.DataFrame()
+    dfdisease=pandas.DataFrame()
+    dfmental=pandas.DataFrame()
+        
+    
+    dfadr.to_csv('ADR2_TFIDF.csv')
+    dfdisease.to_csv('disease2_TFIDF.csv')
+    dfmental.to_csv('mental2_TFIDF.csv')
+    df.to_csv("TOTAL2_TFIDF.csv")
+    return  [vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental]
+def TFIDF3():
+    
+    vectorizer = TfidfVectorizer()
+    #listOfPosts=posts.iloc[:]['Filtered']
+    listOfPosts2=posts.iloc[:]['Stemmed']
+    bagOfWords = vectorizer.fit(listOfPosts2.tolist())
+    bagOfWords = vectorizer.transform(listOfPosts2.tolist())
+    df=pandas.DataFrame(bagOfWords.toarray(),columns=vectorizer.get_feature_names())
+    dfadr=pandas.DataFrame()
+    dfdisease=pandas.DataFrame()
+    dfmental=pandas.DataFrame()
+    adrList=[];
+    for i in calcium_ADR_Dictionary:
+        for j in calcium_ADR_Dictionary[i]:
+            adrList.append(j)
+    mentalList=[];
+    for i in calcium_Mental_Dysfunction_Dictionary:
+        for j in calcium_Mental_Dysfunction_Dictionary[i]:
+            mentalList.append(j)
+    diseaseList=[];
+    for i in calcium_Disease_Dictionary:
+        for j in calcium_Disease_Dictionary[i]:
+            diseaseList.append(j)
+    for i in vectorizer.get_feature_names():
+        if i in adrList:
+            dfadr=dfadr.join(df[i])
+            dfadr[i]=df[i]
+            print i
+        
+        if i in diseaseList:
+            dfdisease=dfdisease.join(df[i])
+            dfdisease[i]=df[i]
+            print i
+        
+        elif i in mentalList:
+            dfmental=dfmental.join(df[i])
+            dfmental[i]=df[i] 
+            print i
+        else:
+            del df[i]
+        
+    
+    dfadr.to_csv('ADR3_TFIDF.csv')
+    dfdisease.to_csv('disease3_TFIDF.csv')
+    dfmental.to_csv('mental3_TFIDF.csv')
+    df.to_csv("TOTAL3_TFIDF.csv")
+    return  [vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental]
 #feetToCM()
 #features()
 #mentions()
 #age()
 #pressure()
+#vector,bag,total,adr,disease,mental=TFIDF()
+#vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental=TFIDF2()
