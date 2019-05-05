@@ -537,6 +537,13 @@ age_related_list=[
       "at"
 ]
 
+weight_related_list=[
+'weight','w'
+'lb','pound' ,'pounds' ,'lbs',
+'kg','kilo','kilogram'
+]
+kgs=['kg','kilo','kilogram']
+lbs=['lbs','lb','pound' ,'pounds']
 drugList={
         "Nadolol":["Nadolol","Beta"],
         "Amlodipine":["Amlodipine","Calcium"],
@@ -548,8 +555,8 @@ drugList={
 
 posts= pandas.read_csv('CurrentPosts.csv')
 
-#listOfPosts1=posts.iloc[:]['Stemmed']
-#listOfPosts2=posts.iloc[:]['Filtered']
+listOfPosts1=posts.iloc[:]['Stemmed']
+listOfPosts2=posts.iloc[:]['Filtered']
 for i in posts.columns:
     if "Unnamed" in i:
         posts=posts.drop(columns=[i])
@@ -577,17 +584,46 @@ def pressure():
                 continue
         word_tokens = word_tokenize(newSentence)
         presure=[]
+        bigs=[]
+        smalls=[]
         for w in word_tokens: 
             if ('/' in w ):
                 if (any(c.isalpha() for c in w))==False:
                     k=w.split('/')
-                    if(k[0]!='' and int(k[0])>12):
+                    if(k[0]!='' and int(k[0])>100 and k[1]!=''):
                         presure.append(w)
+                        bigs.append(k[0])
+                        smalls.append(k[1])
             filtered=' '.join(map(str,presure)) 
             filtered=filtered.translate(None, string.punctuation)
             #posts.at[i ,'Filtered'] = filtered
-        
         posts.at[i,'pressures']= str(presure)
+        if len(presure)==1:
+            posts.at[i,'big1']=bigs[0]
+            posts.at[i,'small1']=smalls[0]
+        elif len(presure)==0:
+            continue
+        else:
+            minposition = bigs.index(min(bigs))
+            maxposition = bigs.index(max(bigs))
+            if maxposition==minposition:
+                minposition = smalls.index(min(smalls))
+                maxposition = smalls.index(max(smalls))
+                print str(i)+": " +str(bigs[maxposition])
+                print str(i)+": " +str(smalls[maxposition])
+                
+                print str(i)+": " +str(bigs[minposition])
+                print str(i)+": " +str(smalls[minposition])
+            
+            posts.at[i,'big1']=str(bigs[maxposition])
+            posts.at[i,'small1']=str(smalls[maxposition])
+            if(maxposition!=minposition):
+                posts.at[i,'big2']=str(bigs[minposition])
+                posts.at[i,'small2']=str(smalls[minposition])
+            
+        
+            
+        
     posts.to_csv('CurrentPosts.csv')
 
 def age():
@@ -740,7 +776,55 @@ def height():
        
         #print ""
     posts.to_csv('CurrentPosts.csv')
+def weight():
+    for i in range(0,len(posts)):
+    
+        newSentence =""
+        sentence=posts.iloc[i]['Content']
+        kg=[]
+        lb=[]
+        weight=[]
+        ch=""
+        isDigit=False
+        for k in range(0,len(sentence)):
+            if sentence[k].isdigit():
+                isDigit=True
+            if isDigit==True and (sentence[k].isdigit()):
+                ch+=sentence[k]
+            elif isDigit==True and not (sentence[k].isdigit()):
+                isDigit=False
+                newSentence+=' '
+            if (sentence[k].isalpha()) or sentence[k].isdigit() or sentence[k]==' ' or sentence[k]=="/":
+                newSentence=newSentence+sentence[k]
+                continue
+            else:
+                newSentence=newSentence+" " 
+                continue
+        word_tokens = word_tokenize(newSentence)
+        for w in range(1,len(word_tokens)-1): 
+            if (word_tokens[w-1] in weight_related_list or  word_tokens[w+1] in weight_related_list) and word_tokens[w].isdigit() :
+                if word_tokens[w-1] in kgs or  word_tokens[w+1] in kgs:
+                    kg.append(int(word_tokens[w]))
+                else:
+                    lb.append(int(word_tokens[w]))
+                weight.append(int(word_tokens[w]))
+               
+            filtered=' '.join(map(str,word_tokens[w])) 
+            filtered=filtered.translate(None, string.punctuation)
+        posts.at[i,'weights']=str(weight)
+        if(len(kg)>0):
+            posts.at[i,'kg']=str(max(kg))
+            posts.at[i,'weights2']=str(int(max(kg)))
+        elif len(lb)>0:
+            posts.at[i,'lb']=str(max(lb))
+            posts.at[i,'weights2']=str(int(max(lb)*0.453592))
+        
+       
+    posts.to_csv('CurrentPosts.csv')
 def features():
+    ADRs=pandas.DataFrame()
+    DSs=pandas.DataFrame()
+    Mental=pandas.DataFrame()
     for i in calcium_ADR_Dictionary:
         for j in calcium_ADR_Dictionary[i]:
             posts.at[0,j]=0
@@ -749,8 +833,10 @@ def features():
             for k in calcium_ADR_Dictionary[j]:
                 if k in posts.at[i,'ADRs']:
                     posts.at[i,k]="1"
+                    ADRs.at[i,k]="1"
                 else:
                     posts.at[i,k]="0"
+                    ADRs.at[i,k]="0"
     for i in calcium_Disease_Dictionary:
         for j in calcium_Disease_Dictionary[i]:
             posts.at[0,j]=0
@@ -759,8 +845,10 @@ def features():
             for k in calcium_Disease_Dictionary[j]:
                 if k in posts.at[i,'Dieases']:
                     posts.at[i,k]="1"
+                    DSs.at[i,k]="1"
                 else:
-                    posts.at[i,k]="0"     
+                    posts.at[i,k]="0"    
+                    DSs.at[i,k]="0"
     for i in calcium_Mental_Dysfunction_Dictionary:
         for j in calcium_Mental_Dysfunction_Dictionary[i]:
             posts.at[0,j]=0
@@ -770,9 +858,14 @@ def features():
             for k in calcium_Mental_Dysfunction_Dictionary[j]:
                 if k in posts.at[i,'Mentals']:
                     posts.at[i,k]="1"
+                    Mental.at[i,k]="1"
                 else:
                     posts.at[i,k]="0"
+                    Mental.at[i,k]="0"
     posts.to_csv('CurrentPosts.csv')
+    ADRs.to_excel('ADRs.xlsx')
+    DSs.to_excel('DS.xlsx')
+    Mental.to_excel('Mental.xlsx')
 def feetToCM():
     for i in range(0,len(posts)):
         feet=posts.iloc[i]['Inches']
@@ -844,36 +937,25 @@ def TFIDF3():
     vectorizer = TfidfVectorizer()
     #listOfPosts=posts.iloc[:]['Filtered']
     listOfPosts2=posts.iloc[:]['Stemmed']
-    bagOfWords = vectorizer.fit(listOfPosts2.tolist())
-    bagOfWords = vectorizer.transform(listOfPosts2.tolist())
+    corpus = ["".join(listOfPosts2.tolist())]
+    bagOfWords = vectorizer.fit(corpus)
+    bagOfWords = vectorizer.transform(corpus)
     df=pandas.DataFrame(bagOfWords.toarray(),columns=vectorizer.get_feature_names())
     dfadr=pandas.DataFrame()
     dfdisease=pandas.DataFrame()
     dfmental=pandas.DataFrame()
-    adrList=[];
-    for i in calcium_ADR_Dictionary:
-        for j in calcium_ADR_Dictionary[i]:
-            adrList.append(j)
-    mentalList=[];
-    for i in calcium_Mental_Dysfunction_Dictionary:
-        for j in calcium_Mental_Dysfunction_Dictionary[i]:
-            mentalList.append(j)
-    diseaseList=[];
-    for i in calcium_Disease_Dictionary:
-        for j in calcium_Disease_Dictionary[i]:
-            diseaseList.append(j)
     for i in vectorizer.get_feature_names():
-        if i in adrList:
+        if i in calcium_ADR_Dictionary:
             dfadr=dfadr.join(df[i])
             dfadr[i]=df[i]
             print i
         
-        if i in diseaseList:
+        if i in calcium_Disease_Dictionary:
             dfdisease=dfdisease.join(df[i])
             dfdisease[i]=df[i]
             print i
         
-        elif i in mentalList:
+        elif i in calcium_Mental_Dysfunction_Dictionary:
             dfmental=dfmental.join(df[i])
             dfmental[i]=df[i] 
             print i
@@ -881,11 +963,21 @@ def TFIDF3():
             del df[i]
         
     
-    dfadr.to_csv('ADR3_TFIDF.csv')
-    dfdisease.to_csv('disease3_TFIDF.csv')
-    dfmental.to_csv('mental3_TFIDF.csv')
-    df.to_csv("TOTAL3_TFIDF.csv")
+    dfadr.to_csv('ADR_TFIDF3.csv')
+    dfdisease.to_csv('disease_TFIDF3.csv')
+    dfmental.to_csv('mental_TFIDF3.csv')
+    df.to_csv("TOTAL_TFIDF3.csv")
     return  [vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental]
+def highestIDF():
+    dfadr=pandas.read_csv('ADR_TFIDF3.csv')
+    s={}
+    for i in dfadr:
+        s[i]=dfadr[i].tolist()[0]
+    x=sorted(s.items(), key = lambda kv:(kv[1], kv[0]))
+    w = open("SortedIDF.txt",'w')
+    for i in x:
+        w.write(str(i[0])+" : " +str(i[1])+'\n')
+    w.close()
 #feetToCM()
 #features()
 #mentions()
@@ -893,3 +985,5 @@ def TFIDF3():
 #pressure()
 #vector,bag,total,adr,disease,mental=TFIDF()
 #vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental=TFIDF2()
+#vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental=TFIDF3()
+#weight()
