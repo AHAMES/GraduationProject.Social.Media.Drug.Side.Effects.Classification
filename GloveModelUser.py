@@ -8,10 +8,12 @@ Created on Wed May  8 12:29:50 2019
 
 
 from glove import Corpus, Glove
-
+import pandas
 
 glov=Glove.load('GP.model')
 glov2=Glove.load('GPStemmed.model')
+ADRs=pandas.read_csv('ADR_TFIDF3.csv').columns.tolist()
+del ADRs[0]
 #glov3=Glove.load('GPOneList.model')
 #glov4=Glove.load('GPStemmedOneList.model')
 
@@ -36,11 +38,13 @@ def printOutVectors():
     f= open("GPLabels.txt","w+")
     w=open("GP.txt","w+")
     for i in glov.dictionary:
-        f.write(i+'\n')
-        for j in glov.word_vectors[glov.dictionary[i]]:
-
-            w.write(str(j)+'\t')
-        w.write('\n')
+        if i in ADRs:
+            
+            f.write(i+'\n')
+            for j in glov.word_vectors[glov.dictionary[i]]:
+    
+                w.write(str(j)+'\t')
+            w.write('\n')
     f.close()
     w.close()
         
