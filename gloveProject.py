@@ -4,20 +4,72 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
 from nltk.stem import PorterStemmer
 
-print (5)
+
 from glove import Corpus, Glove
 posts= pandas.read_csv('CurrentPosts.csv')
 
 listOfPosts1=posts.iloc[:]['Stemmed']
 listOfPosts2=posts.iloc[:]['Filtered']
 inputPosts=[]
+inputPosts2=[]
+
+inputPosts3=[]
+inputPosts4=[]
+inputPosts3.append([])
+inputPosts4.append([])
+
 for i in range(0,len(listOfPosts2)):
     inputPosts.append(word_tokenize(listOfPosts2[i]))
     
-corpus = Corpus() 
-corpus.fit(inputPosts, window=10)
-glove = Glove(no_components=5, learning_rate=0.05)
+for i in range(0,len(listOfPosts1)):
+    inputPosts2.append(word_tokenize(listOfPosts1[i]))  
+    
+for i in range(0,len(listOfPosts2)):
+    inputPosts3[0]+=(word_tokenize(listOfPosts2[i]))
+    
+for i in range(0,len(listOfPosts1)):
+    inputPosts4[0]+=(word_tokenize(listOfPosts1[i]))  
+    
 
-glove.fit(corpus.matrix, epochs=30, no_threads=4, verbose=True)
+
+corpus3 = Corpus() 
+corpus3.fit(inputPosts, window=10)
+glove3 = Glove(no_components=100, learning_rate=0.05)
+
+glove3.fit(corpus3.matrix, epochs=1000, no_threads=10, verbose=True)
+glove3.add_dictionary(corpus3.dictionary)
+glove3.save('GPOneList.model')
+
+
+corpus4 = Corpus() 
+
+
+corpus4.fit(inputPosts2, window=10)
+glove4 = Glove(no_components=100, learning_rate=0.05)
+
+glove4.fit(corpus4.matrix, epochs=1000, no_threads=10, verbose=True)
+glove4.add_dictionary(corpus4.dictionary)
+glove4.save('GPStemmedOneList.model')
+
+corpus = Corpus() 
+
+
+
+corpus.fit(inputPosts, window=10)
+glove = Glove(no_components=100, learning_rate=0.05)
+
+glove.fit(corpus.matrix, epochs=1000, no_threads=10, verbose=True)
 glove.add_dictionary(corpus.dictionary)
 glove.save('GP.model')
+
+
+corpus2 = Corpus() 
+
+
+corpus2.fit(inputPosts2, window=10)
+glove2 = Glove(no_components=100, learning_rate=0.05)
+
+glove2.fit(corpus2.matrix, epochs=1000, no_threads=10, verbose=True)
+glove2.add_dictionary(corpus2.dictionary)
+glove2.save('GPStemmed.model')
+
