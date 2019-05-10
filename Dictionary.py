@@ -968,6 +968,44 @@ def TFIDF3():
     dfmental.to_csv('mental_TFIDF3.csv')
     df.to_csv("TOTAL_TFIDF3.csv")
     return  [vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental]
+
+def BMI():
+    BMI=[]
+    for i in range(0,len(posts)):
+       
+        newSentence =""
+        sentence=posts.iloc[i]['Content']
+        ch=""
+        isDigit=False
+        for k in range(0,len(sentence)):
+            if sentence[k].isdigit():
+                isDigit=True
+            if isDigit==True and (sentence[k].isdigit()):
+                ch+=sentence[k]
+            elif isDigit==True and not (sentence[k].isdigit()):
+                isDigit=False
+                newSentence+=' '
+            if (sentence[k].isalpha()) or sentence[k].isdigit() or sentence[k]==' ' or sentence[k]=="/":
+                newSentence=newSentence+sentence[k]
+                continue
+            else:
+                newSentence=newSentence+" " 
+                continue
+        word_tokens = word_tokenize(newSentence)
+        
+        correct=False
+        for k in range(0,len(word_tokens)-1):
+            if word_tokens[k]=='BMI'or word_tokens[k]=='bmi' or ((word_tokens[k-1]=='Body'or word_tokens[k-1]=='body') and (word_tokens[k]=='mass'or word_tokens[k]=='mass') and (word_tokens[k-1]=='Index'or word_tokens[k-1]=='index')):
+               BMI.append('1')
+               correct=True
+               break
+        if correct==False:
+            BMI.append('0')
+        elif correct==True:
+            correct=False
+    return BMI
+          
+m=BMI()      
 def highestIDF():
     dfadr=pandas.read_csv('ADR_TFIDF3.csv')
     s={}

@@ -1,0 +1,77 @@
+After excluding drugs from a 15 ranks list
+
+amlodipin (Calcium):
+hoarsness
+frenzi
+hallucination
+nervousness
+schizophrenia
+alcohol (addiction)
+pain
+arthralgia
+forget (forgetting or bad memory)
+jerk (Spasmodic movement)
+
+diltiazem (Calcium):
+convulsions
+clumsiness
+caffein (addiction)
+phobia
+imbalance
+burn
+cough
+ailment
+tingling
+hallucination
+anxiety
+
+lisinopril (Angiotensin):
+heaches
+cough
+alcohol (addiction)
+dizziness
+arthralgia
+convulsions
+apnoea
+forget
+
+atenolol (Beta):
+anxieti
+sleeplessness
+hoars
+anxious (anxiety)
+arthralgia
+apnoea
+alcohol (addiction)
+pain
+convulsions
+
+
+
+Nadolol (Beta):
+tension
+despondency
+spray (Spraying behavior)
+insomnia
+malais
+lightheadedness
+restlessness
+hemiplegia
+apnoea
+ailment
+shake
+lethargy
+
+Hydrochlorothiazid (Diuretics):
+convulsions
+sleeplessness
+fatigue
+sigh
+hoarsness
+cough
+weak
+frenzi
+seizures
+hangovers
+psychotic
+
