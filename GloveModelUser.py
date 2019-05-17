@@ -50,13 +50,13 @@ def printOutVectors(filename,adr,ds,men):
     
     for i in glov2.dictionary:
         k = i
-        if (adr and (k in ADRs)) or (ds and (k in diseases)) or (mental and (k in mental)) or (k in DrugList) or (adr and ds and men):
+        #if (adr and (k in ADRs)) or (ds and (k in diseases)) or (mental and (k in mental)) or (k in DrugList) or (adr and ds and men):
             
-            f.write(k+'\n')
-            for j in glov2.word_vectors[glov2.dictionary[k]]:
+        f.write(k+'\n')
+        for j in glov2.word_vectors[glov2.dictionary[k]]:
     
-                w.write(str(j)+'\t')
-            w.write('\n')
+            w.write(str(j)+'\t')
+        w.write('\n')
     f.close()
     w.close()
-printOutVectors('DrugLimited',1,0,1)
+printOutVectors('FullModel',1,0,1)

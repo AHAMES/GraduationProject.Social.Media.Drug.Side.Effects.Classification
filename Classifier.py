@@ -77,7 +77,6 @@ def getMissingPercentage(feature):
 imp_mean = SimpleImputer(missing_values=np.nan, strategy='median')
 result['Age']=imp_mean.fit_transform(result['Age'].values.reshape(-1, 1))
 
-
 kf = KFold(n_splits=10)
 kf.get_n_splits(result)
 X_train, X_test, Y_train, Y_test = train_test_split(result, labels, test_size=0.3, random_state=0)  
