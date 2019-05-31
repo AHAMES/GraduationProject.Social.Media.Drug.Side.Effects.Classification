@@ -948,17 +948,17 @@ def TFIDF3():
         if i in calcium_ADR_Dictionary:
             dfadr=dfadr.join(df[i])
             dfadr[i]=df[i]
-            print i
+            #print i
         
         if i in calcium_Disease_Dictionary:
             dfdisease=dfdisease.join(df[i])
             dfdisease[i]=df[i]
-            print i
+            #print i
         
         elif i in calcium_Mental_Dysfunction_Dictionary:
             dfmental=dfmental.join(df[i])
             dfmental[i]=df[i] 
-            print i
+            #print i
         else:
             del df[i]
         
@@ -968,7 +968,39 @@ def TFIDF3():
     dfmental.to_csv('mental_TFIDF3.csv')
     df.to_csv("TOTAL_TFIDF3.csv")
     return  [vectorizer,bagOfWords,df,dfadr,dfdisease,dfmental]
-
+def TF():
+    ADRs= pandas.read_excel('ADRs.xlsx')
+    DSs= pandas.read_excel('DS.xlsx')
+    Mental= pandas.read_excel('Mental.xlsx')
+    
+    df=pandas.DataFrame()
+    for i in ADRs:
+        count=0
+        for j in ADRs[i]:
+            if j == 1:
+                count+=1
+        df.at[i,0]=count
+    df.to_excel('ADRF.xlsx')
+    df=pandas.DataFrame()
+    for i in DSs:
+        count=0
+        for j in DSs[i]:
+            if j == 1:
+                count+=1
+        df.at[i,0]=count
+    df.to_excel('DSF.xlsx')
+    
+    df=pandas.DataFrame()
+    for i in Mental:
+        count=0
+        for j in Mental[i]:
+            if j == 1:
+                count+=1
+        df.at[i,0]=count
+    df.to_excel('MentalF.xlsx')
+    #ADRs.to_excel('ADRF.xlsx')
+    #DSs.to_excel('DSF.xlsx')
+    #Mental.to_excel('MentalF.xlsx')
 def BMI():
     BMI=[]
     for i in range(0,len(posts)):
@@ -1017,8 +1049,8 @@ def highestIDF():
         w.write(str(i[0])+" : " +str(i[1])+'\n')
     w.close()
 #feetToCM()
-#features()
 #mentions()
+#features()
 #age()
 #pressure()
 #vector,bag,total,adr,disease,mental=TFIDF()
