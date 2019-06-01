@@ -7,6 +7,7 @@ Created on Sat Jun  1 01:00:04 2019
 import nltk
 import string
 import pandas
+import json
 
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
@@ -372,5 +373,14 @@ def features():
     ADRs.to_excel('ADRs.xlsx')
     DSs.to_excel('DS.xlsx')
     Mental.to_excel('Mental.xlsx')
+def count(name):
+    posts = pandas.read_excel('askapatient.xlsx')
+    count=0
+    for i in posts[name]:
+        if i==0:
+            count+=1
+    print count
+#mentions()
+#features()
 #posts=TFIDF()
     
