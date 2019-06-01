@@ -136,12 +136,12 @@ public class Crawler {
             writeToCSV(threads);
         } catch (IOException ex) {
             System.out.println(ex);
-            System.out.println("IOException, writting To CSV file for backup");
+            System.out.println("IOException, writting To CSV file for backup 2");
             writeToCSV(threads);
             
         } catch (Exception ex2) {
             System.out.println(ex2);
-            System.out.println("Connection timeout, writting To CSV file for backup");
+            System.out.println("Connection timeout, writting To CSV file for backup 2 ");
             writeToCSV(threads);
         }
     }
