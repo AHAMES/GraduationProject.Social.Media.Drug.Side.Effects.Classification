@@ -18,7 +18,7 @@ from nltk.stem import PorterStemmer
 
 
 #respone=vectorizer.fit_transform()
-posts= pandas.read_csv('CurrentPosts.csv')
+posts= pandas.read_excel('askapatient.xlsx')
 vectorizer = TfidfVectorizer()
 vectorizer2 = TfidfVectorizer()
 listOfPosts=posts.iloc[:]['Filtered']

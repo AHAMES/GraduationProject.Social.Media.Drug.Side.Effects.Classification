@@ -6,7 +6,7 @@ Created on Sat Mar 30 13:02:08 2019
 """
 
 
-f = open("TFIDFOutput.txt", "r")
+f = open("TFIDF3Output.txt", "r")
 import collections
 from nltk.stem import PorterStemmer
 from nltk.tokenize import word_tokenize
@@ -75,7 +75,7 @@ for line in f:
     
 f.close()
 
-w = open("ADR_Dictionary.txt",'w')
+w = open("ADR_Dictionary1.txt",'w')
 j=0
 for i in sorted(ADR_Dictionary.iterkeys()):
     w.write('\''+str(i)+'\''+":"+str(ADR_Dictionary[i])+"\n")
@@ -83,7 +83,7 @@ for i in sorted(ADR_Dictionary.iterkeys()):
 print j
 w.close()    
     
-w = open("Disease_Dictionary.txt",'w')
+w = open("Disease_Dictionary1.txt",'w')
 j=0
 for i in sorted(Disease_Dictionary.iterkeys()):
     w.write('\''+str(i)+'\''+":"+str(Disease_Dictionary[i])+"\n")
@@ -91,7 +91,7 @@ for i in sorted(Disease_Dictionary.iterkeys()):
 print j
 w.close()     
 
-w = open("Mental_Dictionary.txt",'w')
+w = open("Mental_Dictionary1.txt",'w')
 j=0
 for i in sorted(Mental_Dictionary.iterkeys()):
     w.write('\''+str(i)+'\''+":"+str(Mental_Dictionary[i])+"\n")
