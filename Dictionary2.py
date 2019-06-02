@@ -223,7 +223,7 @@ def formulate():
 
 #posts=pandas.read_excel('askapatient.xlsx')
 #col,posts=formulate()
-def TFIDF():
+def TFIDF1():
     posts = pandas.read_excel('askapatient.xlsx')
     stop_words =  set(stopwords.words('english'))
     for i in range(0,len(posts)):
@@ -254,7 +254,7 @@ def TFIDF():
             posts.at[i,'Stemmed'] = stemmed
     posts.to_excel('askapatient.xlsx')
     return posts
-def mentions():
+def mentions1():
     
     '''Stemmed'''
     ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -327,7 +327,7 @@ def mentions():
         # str(js[j])
 
     posts.to_excel('askapatient.xlsx')
-def features():
+def features1():
     posts = pandas.read_excel('askapatient.xlsx')
     ADRs=pandas.DataFrame()
     DSs=pandas.DataFrame()
@@ -369,10 +369,43 @@ def features():
                 else:
                     posts.at[i,k]="0"
                     Mental.at[i,k]="0"
-    posts.to_excel('askapatient.xlsx')
-    ADRs.to_excel('ADRs.xlsx')
-    DSs.to_excel('DS.xlsx')
-    Mental.to_excel('Mental.xlsx')
+    posts.to_excel('askapatient1.xlsx')
+    ADRs.to_excel('ADRs1.xlsx')
+    DSs.to_excel('DS1.xlsx')
+    Mental.to_excel('Mental1.xlsx')
+def TF1():
+    ADRs= pandas.read_excel('ADRs1.xlsx')
+    DSs= pandas.read_excel('DS1.xlsx')
+    Mental= pandas.read_excel('Mental1.xlsx')
+    
+    df=pandas.DataFrame()
+    for i in ADRs:
+        count=0
+        for j in ADRs[i]:
+            if j == 1:
+                count+=1
+        df.at[i,0]=count
+    df.to_excel('ADRF1.xlsx')
+    df=pandas.DataFrame()
+    for i in DSs:
+        count=0
+        for j in DSs[i]:
+            if j == 1:
+                count+=1
+        df.at[i,0]=count
+    df.to_excel('DSF1.xlsx')
+    
+    df=pandas.DataFrame()
+    for i in Mental:
+        count=0
+        for j in Mental[i]:
+            if j == 1:
+                count+=1
+        df.at[i,0]=count
+    df.to_excel('MentalF1.xlsx')
+    #ADRs.to_excel('ADRF.xlsx')
+    #DSs.to_excel('DSF.xlsx')
+    #Mental.to_excel('MentalF.xlsx')
 def count(name):
     posts = pandas.read_excel('askapatient.xlsx')
     count=0
