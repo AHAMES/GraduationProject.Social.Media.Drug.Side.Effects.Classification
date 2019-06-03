@@ -9,14 +9,34 @@ Created on Wed May  8 12:29:50 2019
 
 from glove import Corpus, Glove
 import pandas
-
+import numpy as np
 glov=Glove.load('GP.model')
 glov2=Glove.load('GPStemmed.model')
 ADRs=pandas.read_csv('ADR_TFIDF3.csv').columns.tolist()
 diseases=pandas.read_csv('disease_TFIDF3.csv').columns.tolist()
 mental=pandas.read_csv('mental_TFIDF3.csv').columns.tolist()
+from sklearn.feature_extraction.text import CountVectorizer
+from collections import Counter
+vectorizer = CountVectorizer()
 from nltk.stem import PorterStemmer
+
+posts= pandas.read_csv('CurrentPosts.csv')
+listOfPosts1=posts.iloc[:]['Stemmed']
+drugs=posts.iloc[:]['Drug']
+familylist=posts.iloc[:]['DrugFamily']
 stemmer=PorterStemmer()
+for i in range(len(listOfPosts1)):
+    listOfPosts1[i]=stemmer.stem(word=drugs[i])+" "+stemmer.stem(word=familylist[i])+" "+listOfPosts1[i]  
+cnt = Counter()
+
+for i in listOfPosts1.tolist():
+    for word in i.split(' '):
+        cnt[word] += 1
+transformed_data = vectorizer.fit_transform(listOfPosts1)
+print(transformed_data.toarray().sum(axis=0))
+#print (transformed_data[vectorizer.vocabulary_['amlodipin']])
+print (zip(vectorizer.get_feature_names(), np.ravel(transformed_data.sum(axis=0))))
+
 del ADRs[0]
 del diseases[0]
 del mental[0]
@@ -59,4 +79,4 @@ def printOutVectors(filename,adr,ds,men):
         w.write('\n')
     f.close()
     w.close()
-printOutVectors('FullModel',1,0,1)
+#printOutVectors('FullModel',1,0,1)
