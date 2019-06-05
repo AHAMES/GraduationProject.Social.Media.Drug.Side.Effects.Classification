@@ -4,35 +4,36 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize 
 from nltk.stem import PorterStemmer
 
+stemmer=PorterStemmer()
 
 from glove import Corpus, Glove
 posts= pandas.read_csv('CurrentPosts.csv')
 
 listOfPosts1=posts.iloc[:]['Stemmed']
 listOfPosts2=posts.iloc[:]['Filtered']
-inputPosts=[]
+drugs=posts.iloc[:]['Drug']
+familylist=posts.iloc[:]['DrugFamily']
+
 inputPosts2=[]
 
-inputPosts3=[]
-inputPosts4=[]
-inputPosts3.append([])
-inputPosts4.append([])
 
-for i in range(0,len(listOfPosts2)):
-    inputPosts.append(word_tokenize(listOfPosts2[i]))
-    
+
+#for i in range(0,len(listOfPosts2)):
+#    inputPosts.append(word_tokenize(listOfPosts2[i]))
+for i in range(len(listOfPosts1)):
+    listOfPosts1[i]=stemmer.stem(word=drugs[i])+" "+stemmer.stem(word=familylist[i])+" "+listOfPosts1[i]     
 for i in range(0,len(listOfPosts1)):
     inputPosts2.append(word_tokenize(listOfPosts1[i]))  
     
-for i in range(0,len(listOfPosts2)):
-    inputPosts3[0]+=(word_tokenize(listOfPosts2[i]))
+#for i in range(0,len(listOfPosts2)):
+#    inputPosts3[0]+=(word_tokenize(listOfPosts2[i]))
     
-for i in range(0,len(listOfPosts1)):
-    inputPosts4[0]+=(word_tokenize(listOfPosts1[i]))  
+#for i in range(0,len(listOfPosts1)):
+#    inputPosts4[0]+=(word_tokenize(listOfPosts1[i]))  
     
 
 
-corpus3 = Corpus() 
+'''corpus3 = Corpus() 
 corpus3.fit(inputPosts, window=10)
 glove3 = Glove(no_components=100, learning_rate=0.05)
 
@@ -60,7 +61,7 @@ glove = Glove(no_components=100, learning_rate=0.05)
 
 glove.fit(corpus.matrix, epochs=1000, no_threads=10, verbose=True)
 glove.add_dictionary(corpus.dictionary)
-glove.save('GP.model')
+glove.save('GP.model')'''
 
 
 corpus2 = Corpus() 
