@@ -14,6 +14,7 @@ listOfPosts2=posts.iloc[:]['Filtered']
 drugs=posts.iloc[:]['Drug']
 familylist=posts.iloc[:]['DrugFamily']
 
+inputPosts=[]
 inputPosts2=[]
 
 
@@ -21,10 +22,43 @@ inputPosts2=[]
 #for i in range(0,len(listOfPosts2)):
 #    inputPosts.append(word_tokenize(listOfPosts2[i]))
 for i in range(len(listOfPosts1)):
-    listOfPosts1[i]=stemmer.stem(word=drugs[i])+" "+stemmer.stem(word=familylist[i])+" "+listOfPosts1[i]     
-for i in range(0,len(listOfPosts1)):
-    inputPosts2.append(word_tokenize(listOfPosts1[i]))  
+    listOfPosts1[i]=stemmer.stem(word=drugs[i])+" "+stemmer.stem(word=familylist[i])+" "+listOfPosts1[i]  
     
+
+for i in range(0,len(listOfPosts1)):
+    x=word_tokenize(listOfPosts1[i])
+    y=""
+    j=0
+    while(j in range(len(x))):
+        if x[j].isdigit() and j!=len(x)-1:
+            if x[j+1]=='mg' or x[j+1].isdigit():
+                y+=(x[j]+x[j+1]+" ")
+                j+=2
+            else:
+                y+=(x[j]+" ")
+                j+=1
+        else:
+            y+=(x[j]+" ")
+            j+=1
+    inputPosts.append(y)
+
+for i in range(0,len(inputPosts)):
+    x=word_tokenize(inputPosts[i])
+    y=[]
+    j=0
+    while(j in range(len(x))):
+        if x[j].isdigit() and j!=len(x)-1:
+            if x[j+1]=='mg' or x[j+1].isdigit():
+                y.append((x[j]+x[j+1]))
+                j+=2
+            else:
+                y.append((x[j]))
+                j+=1
+        else:
+            y.append((x[j]))
+            j+=1
+    inputPosts2.append(y) 
+
 #for i in range(0,len(listOfPosts2)):
 #    inputPosts3[0]+=(word_tokenize(listOfPosts2[i]))
     

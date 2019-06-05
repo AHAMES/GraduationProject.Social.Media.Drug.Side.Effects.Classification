@@ -10,6 +10,7 @@ Created on Wed May  8 12:29:50 2019
 from glove import Corpus, Glove
 import pandas
 import numpy as np
+import nltk
 glov=Glove.load('GP.model')
 glov2=Glove.load('GPStemmed.model')
 ADRs=pandas.read_csv('ADR_TFIDF3.csv').columns.tolist()
@@ -19,7 +20,8 @@ from sklearn.feature_extraction.text import CountVectorizer
 from collections import Counter
 vectorizer = CountVectorizer()
 from nltk.stem import PorterStemmer
-
+import json
+greeting_words = json.loads(open('greetings.txt', 'r').read())
 posts= pandas.read_csv('CurrentPosts.csv')
 listOfPosts1=posts.iloc[:]['Stemmed']
 drugs=posts.iloc[:]['Drug']
@@ -64,6 +66,7 @@ def printMostSimilar(word,numbers):
     
     print ('C4')
     for i in c4:print (i)'''
+
 def printOutVectors(filename,adr,ds,men):
     f= open(filename+"Labels.txt","w+")
     w=open(filename+".txt","w+")
@@ -71,12 +74,12 @@ def printOutVectors(filename,adr,ds,men):
     for i in glov2.dictionary:
         k = i
         #if (adr and (k in ADRs)) or (ds and (k in diseases)) or (mental and (k in mental)) or (k in DrugList) or (adr and ds and men):
-            
-        f.write(k+'\n')
-        for j in glov2.word_vectors[glov2.dictionary[k]]:
-    
-            w.write(str(j)+'\t')
-        w.write('\n')
+        if cnt[i]>=40 and stemmer.stem(i) not in greeting_words :    
+            f.write(k+'\n')
+            for j in glov2.word_vectors[glov2.dictionary[k]]:
+        
+                w.write(str(j)+'\t')
+            w.write('\n')
     f.close()
     w.close()
-#printOutVectors('FullModel',1,0,1)
+printOutVectors('40model',1,0,1)
