@@ -73,8 +73,8 @@ def printOutVectors(filename,adr,ds,men):
     
     for i in glov2.dictionary:
         k = i
-        #if (adr and (k in ADRs)) or (ds and (k in diseases)) or (mental and (k in mental)) or (k in DrugList) or (adr and ds and men):
-        if cnt[i]>=40 and stemmer.stem(i) not in greeting_words :    
+        if (adr and (k in ADRs)) or (ds and (k in diseases)) or (mental and (k in mental)) or (k in DrugList) or (adr and ds and men):
+        #if cnt[i]>=40 and stemmer.stem(i) not in greeting_words :    
             f.write(k+'\n')
             for j in glov2.word_vectors[glov2.dictionary[k]]:
         
@@ -82,4 +82,4 @@ def printOutVectors(filename,adr,ds,men):
             w.write('\n')
     f.close()
     w.close()
-printOutVectors('40model',1,0,1)
+printOutVectors('askmodel',1,0,1)

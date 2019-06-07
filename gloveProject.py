@@ -7,8 +7,8 @@ from nltk.stem import PorterStemmer
 stemmer=PorterStemmer()
 
 from glove import Corpus, Glove
-posts= pandas.read_csv('CurrentPosts.csv')
-
+#posts= pandas.read_csv('CurrentPosts.csv')
+posts=pandas.read_excel('askapatient.xlsx')
 listOfPosts1=posts.iloc[:]['Stemmed']
 listOfPosts2=posts.iloc[:]['Filtered']
 drugs=posts.iloc[:]['Drug']
@@ -106,5 +106,5 @@ glove2 = Glove(no_components=100, learning_rate=0.05)
 
 glove2.fit(corpus2.matrix, epochs=1000, no_threads=10, verbose=True)
 glove2.add_dictionary(corpus2.dictionary)
-glove2.save('GPStemmed.model')
+glove2.save('AskStemmed.model')
 
