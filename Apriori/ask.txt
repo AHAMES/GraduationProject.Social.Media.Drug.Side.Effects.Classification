@@ -1,0 +1,291 @@
+1
+Rule: ['Asthma '] -> ['Coughing']
+Support: 0.027777777777777776
+Confidence: 0.875
+Lift: 2.388086642599278
+=====================================2
+Rule: ['Asthma '] -> ['Female']
+Support: 0.0291005291005291
+Confidence: 0.9166666666666666
+Lift: 1.6382978723404253
+=====================================3
+Rule: ['Common Cold '] -> ['Atenolol']
+Support: 0.027777777777777776
+Confidence: 0.5121951219512195
+Lift: 2.889697852202403
+=====================================4
+Rule: ['Lethargy'] -> ['Atenolol']
+Support: 0.022486772486772486
+Confidence: 0.7083333333333334
+Lift: 3.9962686567164183
+=====================================5
+Rule: ['Upper Respiratory Infections '] -> ['Atenolol']
+Support: 0.02513227513227513
+Confidence: 0.48717948717948717
+Lift: 2.748564867967853
+=====================================6
+Rule: ['Common Cold '] -> ['Beta']
+Support: 0.027777777777777776
+Confidence: 0.5121951219512195
+Lift: 2.889697852202403
+=====================================7
+Rule: ['Lethargy'] -> ['Beta']
+Support: 0.022486772486772486
+Confidence: 0.7083333333333334
+Lift: 3.9962686567164183
+=====================================8
+Rule: ['Upper Respiratory Infections '] -> ['Beta']
+Support: 0.02513227513227513
+Confidence: 0.48717948717948717
+Lift: 2.748564867967853
+=====================================9
+Rule: ['Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.051587301587301584
+Confidence: 0.9512195121951219
+Lift: 18.4390243902439
+=====================================10
+Rule: ['Headache'] -> ['Pain']
+Support: 0.042328042328042326
+Confidence: 0.463768115942029
+Lift: 2.1121005762179155
+=====================================11
+Rule: ['Malaise '] -> ['Pain']
+Support: 0.022486772486772486
+Confidence: 0.68
+Lift: 3.0968674698795184
+=====================================12
+Rule: ['Nausea'] -> ['Vertigo']
+Support: 0.027777777777777776
+Confidence: 0.44680851063829785
+Lift: 2.9892675578987005
+=====================================13
+Rule: ['Mental Depression', 'Angiotensin'] -> ['Anxiety']
+Support: 0.026455026455026454
+Confidence: 0.4166666666666667
+Lift: 4.500000000000001
+=====================================14
+Rule: ['Anxiety', 'Angiotensin'] -> ['Pain']
+Support: 0.03042328042328042
+Confidence: 0.4339622641509434
+Lift: 1.976358263241646
+=====================================15
+Rule: ['Asthma ', 'Angiotensin'] -> ['Coughing']
+Support: 0.027777777777777776
+Confidence: 0.875
+Lift: 2.388086642599278
+=====================================16
+Rule: ['Asthma ', 'Angiotensin'] -> ['Female']
+Support: 0.0291005291005291
+Confidence: 0.9166666666666666
+Lift: 1.6382978723404253
+=====================================17
+Rule: ['Fatigue', 'Angiotensin'] -> ['Pain']
+Support: 0.03835978835978836
+Confidence: 0.42028985507246375
+Lift: 1.9140911471974855
+=====================================18
+Rule: ['Headache', 'Angiotensin'] -> ['Pain']
+Support: 0.037037037037037035
+Confidence: 0.45901639344262296
+Lift: 2.090460201461584
+=====================================19
+Rule: ['Angiotensin', 'Malaise '] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.6956521739130435
+Lift: 3.168150864326873
+=====================================20
+Rule: ['Mental Depression', 'Angiotensin'] -> ['Pain']
+Support: 0.026455026455026454
+Confidence: 0.4166666666666667
+Lift: 1.8975903614457834
+=====================================21
+Rule: ['Nausea', 'Angiotensin'] -> ['Vertigo']
+Support: 0.026455026455026454
+Confidence: 0.45454545454545453
+Lift: 3.0410297666934833
+=====================================22
+Rule: ['Mental Depression', 'Lisinopril'] -> ['Anxiety']
+Support: 0.026455026455026454
+Confidence: 0.4166666666666667
+Lift: 4.500000000000001
+=====================================23
+Rule: ['Anxiety', 'Lisinopril'] -> ['Pain']
+Support: 0.03042328042328042
+Confidence: 0.4339622641509434
+Lift: 1.976358263241646
+=====================================24
+Rule: ['Coughing', 'Asthma '] -> ['Female']
+Support: 0.026455026455026454
+Confidence: 0.9523809523809523
+Lift: 1.7021276595744679
+=====================================25
+Rule: ['Lisinopril', 'Asthma '] -> ['Coughing']
+Support: 0.027777777777777776
+Confidence: 0.875
+Lift: 2.388086642599278
+=====================================26
+Rule: ['Lisinopril', 'Asthma '] -> ['Female']
+Support: 0.0291005291005291
+Confidence: 0.9166666666666666
+Lift: 1.6382978723404253
+=====================================27
+Rule: ['Common Cold ', 'Atenolol'] -> ['Upper Respiratory Infections ']
+Support: 0.02513227513227513
+Confidence: 0.9047619047619048
+Lift: 17.53846153846154
+=====================================28
+Rule: ['Beta', 'Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.02513227513227513
+Confidence: 0.9047619047619048
+Lift: 17.53846153846154
+=====================================29
+Rule: ['Fatigue', 'Lisinopril'] -> ['Pain']
+Support: 0.03835978835978836
+Confidence: 0.42028985507246375
+Lift: 1.9140911471974855
+=====================================30
+Rule: ['Fatigue', 'Male'] -> ['Pain']
+Support: 0.023809523809523808
+Confidence: 0.46153846153846156
+Lift: 2.10194624652456
+=====================================31
+Rule: ['Headache', 'Female'] -> ['Pain']
+Support: 0.023809523809523808
+Confidence: 0.4090909090909091
+Lift: 1.8630887185104055
+=====================================32
+Rule: ['Headache', 'Lisinopril'] -> ['Pain']
+Support: 0.037037037037037035
+Confidence: 0.45901639344262296
+Lift: 2.090460201461584
+=====================================33
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Male'] -> ['Hypertensive disease ']
+Support: 0.021164021164021163
+Confidence: 0.4444444444444444
+Lift: 2.27027027027027
+=====================================34
+Rule: ['Lisinopril', 'Malaise '] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.6956521739130435
+Lift: 3.168150864326873
+=====================================35
+Rule: ['Mental Depression', 'Lisinopril'] -> ['Pain']
+Support: 0.026455026455026454
+Confidence: 0.4166666666666667
+Lift: 1.8975903614457834
+=====================================36
+Rule: ['Nausea', 'Lisinopril'] -> ['Vertigo']
+Support: 0.026455026455026454
+Confidence: 0.45454545454545453
+Lift: 3.0410297666934833
+=====================================37
+Rule: ['Mental Depression', 'Lisinopril', 'Angiotensin'] -> ['Anxiety']
+Support: 0.026455026455026454
+Confidence: 0.4166666666666667
+Lift: 4.500000000000001
+=====================================38
+Rule: ['Anxiety', 'Lisinopril', 'Angiotensin'] -> ['Pain']
+Support: 0.03042328042328042
+Confidence: 0.4339622641509434
+Lift: 1.976358263241646
+=====================================39
+Rule: ['Coughing', 'Asthma ', 'Angiotensin'] -> ['Female']
+Support: 0.026455026455026454
+Confidence: 0.9523809523809523
+Lift: 1.7021276595744679
+=====================================40
+Rule: ['Lisinopril', 'Asthma ', 'Angiotensin'] -> ['Coughing']
+Support: 0.027777777777777776
+Confidence: 0.875
+Lift: 2.388086642599278
+=====================================41
+Rule: ['Lisinopril', 'Asthma ', 'Angiotensin'] -> ['Female']
+Support: 0.0291005291005291
+Confidence: 0.9166666666666666
+Lift: 1.6382978723404253
+=====================================42
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Angiotensin', 'Female'] -> ['Coughing']
+Support: 0.04365079365079365
+Confidence: 0.55
+Lift: 1.501083032490975
+=====================================43
+Rule: ['Fatigue', 'Lisinopril', 'Angiotensin'] -> ['Pain']
+Support: 0.03835978835978836
+Confidence: 0.42028985507246375
+Lift: 1.9140911471974855
+=====================================44
+Rule: ['Fatigue', 'Male', 'Angiotensin'] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.47058823529411764
+Lift: 2.143160878809355
+=====================================45
+Rule: ['Headache', 'Angiotensin', 'Female'] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.4
+Lift: 1.821686746987952
+=====================================46
+Rule: ['Headache', 'Lisinopril', 'Angiotensin'] -> ['Pain']
+Support: 0.037037037037037035
+Confidence: 0.45901639344262296
+Lift: 2.090460201461584
+=====================================47
+Rule: ['Lisinopril', 'Angiotensin', 'Malaise '] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.6956521739130435
+Lift: 3.168150864326873
+=====================================48
+Rule: ['Mental Depression', 'Lisinopril', 'Angiotensin'] -> ['Pain']
+Support: 0.026455026455026454
+Confidence: 0.4166666666666667
+Lift: 1.8975903614457834
+=====================================49
+Rule: ['Nausea', 'Lisinopril', 'Angiotensin'] -> ['Vertigo']
+Support: 0.026455026455026454
+Confidence: 0.45454545454545453
+Lift: 3.0410297666934833
+=====================================50
+Rule: ['Coughing', 'Lisinopril', 'Asthma '] -> ['Female']
+Support: 0.026455026455026454
+Confidence: 0.9523809523809523
+Lift: 1.7021276595744679
+=====================================51
+Rule: ['Beta', 'Common Cold ', 'Atenolol'] -> ['Upper Respiratory Infections ']
+Support: 0.02513227513227513
+Confidence: 0.9047619047619048
+Lift: 17.53846153846154
+=====================================52
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril', 'Female'] -> ['Coughing']
+Support: 0.04365079365079365
+Confidence: 0.55
+Lift: 1.501083032490975
+=====================================53
+Rule: ['Fatigue', 'Lisinopril', 'Male'] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.47058823529411764
+Lift: 2.143160878809355
+=====================================54
+Rule: ['Headache', 'Lisinopril', 'Female'] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.4
+Lift: 1.821686746987952
+=====================================55
+Rule: ['Lisinopril', 'Coughing', 'Asthma ', 'Angiotensin'] -> ['Female']
+Support: 0.026455026455026454
+Confidence: 0.9523809523809523
+Lift: 1.7021276595744679
+=====================================56
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril', 'Angiotensin', 'Female'] -> ['Coughing']
+Support: 0.04365079365079365
+Confidence: 0.55
+Lift: 1.501083032490975
+=====================================57
+Rule: ['Fatigue', 'Male', 'Lisinopril', 'Angiotensin'] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.47058823529411764
+Lift: 2.143160878809355
+=====================================58
+Rule: ['Headache', 'Lisinopril', 'Angiotensin', 'Female'] -> ['Pain']
+Support: 0.021164021164021163
+Confidence: 0.4
+Lift: 1.821686746987952
+=====================================

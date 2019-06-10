@@ -12,7 +12,7 @@ import pandas
 import numpy as np
 import nltk
 glov=Glove.load('GP.model')
-glov2=Glove.load('GPStemmed.model')
+glov2=Glove.load('MedHelpStemmed.model')
 ADRs=pandas.read_csv('ADR_TFIDF3.csv').columns.tolist()
 diseases=pandas.read_csv('disease_TFIDF3.csv').columns.tolist()
 mental=pandas.read_csv('mental_TFIDF3.csv').columns.tolist()
@@ -82,4 +82,4 @@ def printOutVectors(filename,adr,ds,men):
             w.write('\n')
     f.close()
     w.close()
-printOutVectors('askmodel',1,0,1)
+printOutVectors('MedLimitedmodel',1,0,1)

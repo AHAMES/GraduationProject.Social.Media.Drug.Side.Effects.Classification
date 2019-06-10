@@ -1,0 +1,241 @@
+1
+Rule: ['Diabetes'] -> ['Angiotensin']
+Support: 0.028259473346178548
+Confidence: 0.419047619047619
+Lift: 1.5244325767690252
+=====================================2
+Rule: ['Mental Depression '] -> ['Anxiety']
+Support: 0.0224791265253693
+Confidence: 0.4117647058823529
+Lift: 2.6602391994142054
+=====================================3
+Rule: ['Atrial Premature Complexes '] -> ['Atenolol']
+Support: 0.029543994861913937
+Confidence: 0.6865671641791045
+Lift: 1.724169475204622
+=====================================4
+Rule: ['Pvc'] -> ['Atenolol']
+Support: 0.06872190109184328
+Confidence: 0.656441717791411
+Lift: 1.6485157332277856
+=====================================5
+Rule: ['Atrial Premature Complexes '] -> ['Beta']
+Support: 0.03147077713551702
+Confidence: 0.7313432835820896
+Lift: 1.5408680548542806
+=====================================6
+Rule: ['Atrial Premature Complexes '] -> ['Pvc']
+Support: 0.028259473346178548
+Confidence: 0.6567164179104478
+Lift: 6.273051918322498
+=====================================7
+Rule: ['Liver Cirrhosis '] -> ['Beta']
+Support: 0.025048169556840076
+Confidence: 0.8863636363636364
+Lift: 1.8674806249231146
+=====================================8
+Rule: ['Brachial Amyotrophic Diplegia '] -> ['Pain']
+Support: 0.04303147077713552
+Confidence: 0.42138364779874216
+Lift: 1.6866178396468934
+=====================================9
+Rule: ['Cerebrovascular accident '] -> ['Hypertensive disease ']
+Support: 0.03789338471419396
+Confidence: 0.7468354430379747
+Lift: 1.6083302694469246
+=====================================10
+Rule: ['Cerebrovascular accident '] -> ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ']
+Support: 0.02697495183044316
+Confidence: 0.5316455696202531
+Lift: 2.4783597362237546
+=====================================11
+Rule: ['Cerebrovascular accident '] -> ['MUNGAN SYNDROME ']
+Support: 0.026332691072575465
+Confidence: 0.5189873417721519
+Lift: 2.3220209515495416
+=====================================12
+Rule: ['Cerebrovascular accident '] -> ['Pain']
+Support: 0.021836865767501604
+Confidence: 0.430379746835443
+Lift: 1.7226253620123
+=====================================13
+Rule: ['Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.0449582530507386
+Confidence: 0.9722222222222222
+Lift: 21.625
+=====================================14
+Rule: ['Congestive heart failure '] -> ['Hypertensive disease ']
+Support: 0.020552344251766216
+Confidence: 0.7804878048780487
+Lift: 1.6808015383058392
+=====================================15
+Rule: ['Diabetes'] -> ['Lisinopril']
+Support: 0.028259473346178548
+Confidence: 0.419047619047619
+Lift: 1.5244325767690252
+=====================================16
+Rule: ['Headache'] -> ['Pain']
+Support: 0.03917790622992935
+Confidence: 0.5213675213675213
+Lift: 2.0868103618746288
+=====================================17
+Rule: ['Liver Cirrhosis '] -> ['Nadolol']
+Support: 0.023763648041104687
+Confidence: 0.8409090909090909
+Lift: 11.002482811306342
+=====================================18
+Rule: ['Malaise'] -> ['Pain']
+Support: 0.028901734104046242
+Confidence: 0.5487804878048781
+Lift: 2.196532697974795
+=====================================19
+Rule: ['Numbness'] -> ['Pain']
+Support: 0.0224791265253693
+Confidence: 0.625
+Lift: 2.5016066838046274
+=====================================20
+Rule: ['Weakness'] -> ['Pain']
+Support: 0.025048169556840076
+Confidence: 0.4382022471910112
+Lift: 1.7539354726899856
+=====================================21
+Rule: ['Pain', 'Amlodipine'] -> ['Hypertensive disease ']
+Support: 0.025048169556840076
+Confidence: 0.7222222222222223
+Lift: 1.5553250345781469
+=====================================22
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Male'] -> ['Angiotensin']
+Support: 0.036608863198458574
+Confidence: 0.42857142857142855
+Lift: 1.559078771695594
+=====================================23
+Rule: ['Atrial Premature Complexes ', 'Atenolol'] -> ['Pvc']
+Support: 0.021836865767501604
+Confidence: 0.7391304347826086
+Lift: 7.06028274206455
+=====================================24
+Rule: ['Common Cold ', 'Atenolol'] -> ['Upper Respiratory Infections ']
+Support: 0.025048169556840076
+Confidence: 0.975
+Lift: 21.686785714285715
+=====================================25
+Rule: ['Dyspnea', 'Atenolol'] -> ['Female']
+Support: 0.023121387283236993
+Confidence: 0.5454545454545454
+Lift: 1.5357553838566496
+=====================================26
+Rule: ['Pvc', 'Female'] -> ['Atenolol']
+Support: 0.02119460500963391
+Confidence: 0.717391304347826
+Lift: 1.8015778401122018
+=====================================27
+Rule: ['Beta', 'Atrial Premature Complexes '] -> ['Pvc']
+Support: 0.0224791265253693
+Confidence: 0.7142857142857143
+Lift: 6.82296231375986
+=====================================28
+Rule: ['Beta', 'Brachial Amyotrophic Diplegia '] -> ['Pain']
+Support: 0.020552344251766216
+Confidence: 0.40506329113924044
+Lift: 1.6212944583645177
+=====================================29
+Rule: ['Beta', 'Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.02697495183044316
+Confidence: 0.9545454545454546
+Lift: 21.231818181818184
+=====================================30
+Rule: ['Beta', 'Dyspnea'] -> ['Female']
+Support: 0.027617212588310854
+Confidence: 0.5512820512820513
+Lift: 1.5521630268465714
+=====================================31
+Rule: ['Pvc', 'Female'] -> ['Beta']
+Support: 0.021836865767501604
+Confidence: 0.7391304347826086
+Lift: 1.5572748132023297
+=====================================32
+Rule: ['Beta', 'Liver Cirrhosis '] -> ['Nadolol']
+Support: 0.023763648041104687
+Confidence: 0.9487179487179487
+Lift: 12.41305753070459
+=====================================33
+Rule: ['Brachial Amyotrophic Diplegia ', 'Hypertensive disease '] -> ['Pain']
+Support: 0.023763648041104687
+Confidence: 0.5441176470588235
+Lift: 2.17786934825344
+=====================================34
+Rule: ['Cerebrovascular accident ', 'Hypertensive disease '] -> ['MUNGAN SYNDROME ']
+Support: 0.021836865767501604
+Confidence: 0.5762711864406779
+Lift: 2.578316773816481
+=====================================35
+Rule: ['Hypertensive disease ', 'Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.023121387283236993
+Confidence: 0.9729729729729729
+Lift: 21.64169884169884
+=====================================36
+Rule: ['Diabetes', 'Female'] -> ['Hypertensive disease ']
+Support: 0.020552344251766216
+Confidence: 0.711111111111111
+Lift: 1.531396957123098
+=====================================37
+Rule: ['Mental Suffering', 'Female'] -> ['Pain']
+Support: 0.020552344251766216
+Confidence: 0.4923076923076923
+Lift: 1.9704963417045678
+=====================================38
+Rule: ['Headache', 'Hypertensive disease '] -> ['Pain']
+Support: 0.02119460500963391
+Confidence: 0.5076923076923077
+Lift: 2.0320743523828355
+=====================================39
+Rule: ['MUNGAN SYNDROME ', 'Mental Suffering'] -> ['Hypertensive disease ']
+Support: 0.020552344251766216
+Confidence: 0.8421052631578947
+Lift: 1.8134963965931425
+=====================================40
+Rule: ['Mental Suffering', 'Hypertensive disease '] -> ['Pain']
+Support: 0.02569043031470777
+Confidence: 0.43956043956043955
+Lift: 1.7593717336647927
+=====================================41
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Male'] -> ['Lisinopril']
+Support: 0.036608863198458574
+Confidence: 0.42857142857142855
+Lift: 1.559078771695594
+=====================================42
+Rule: ['Calcium', 'Pain', 'Amlodipine'] -> ['Hypertensive disease ']
+Support: 0.025048169556840076
+Confidence: 0.7222222222222223
+Lift: 1.5553250345781469
+=====================================43
+Rule: ['Hypertensive disease ', 'MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Angiotensin'] -> ['Male']
+Support: 0.023121387283236993
+Confidence: 0.5714285714285714
+Lift: 1.5313498893533317
+=====================================44
+Rule: ['Beta', 'Atrial Premature Complexes ', 'Atenolol'] -> ['Pvc']
+Support: 0.021836865767501604
+Confidence: 0.7391304347826086
+Lift: 7.06028274206455
+=====================================45
+Rule: ['Beta', 'Common Cold ', 'Atenolol'] -> ['Upper Respiratory Infections ']
+Support: 0.025048169556840076
+Confidence: 0.975
+Lift: 21.686785714285715
+=====================================46
+Rule: ['Beta', 'Dyspnea', 'Atenolol'] -> ['Female']
+Support: 0.023121387283236993
+Confidence: 0.5454545454545454
+Lift: 1.5357553838566496
+=====================================47
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril', 'Hypertensive disease '] -> ['Male']
+Support: 0.023121387283236993
+Confidence: 0.5714285714285714
+Lift: 1.5313498893533317
+=====================================48
+Rule: ['Hypertensive disease ', 'MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril', 'Angiotensin'] -> ['Male']
+Support: 0.023121387283236993
+Confidence: 0.5714285714285714
+Lift: 1.5313498893533317
+=====================================
