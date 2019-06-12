@@ -1,0 +1,10 @@
+Rule: ['Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.05202312138728324
+Confidence: 0.9642857142857143
+Lift: 18.535714285714285
+=====================================
+Rule: ['Mental Depression'] -> ['Pain']
+Support: 0.046242774566473986
+Confidence: 0.5217391304347826
+Lift: 1.6312205343111574
+=====================================

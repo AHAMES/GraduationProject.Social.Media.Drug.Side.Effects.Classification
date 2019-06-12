@@ -1,0 +1,15 @@
+Rule: ['Pvc'] -> ['Atenolol']
+Support: 0.10808080808080808
+Confidence: 0.656441717791411
+Lift: 1.5363529565330898
+=====================================
+Rule: ['Common Cold '] -> ['Upper Respiratory Infections ']
+Support: 0.06262626262626263
+Confidence: 0.96875
+Lift: 15.46875
+=====================================
+Rule: ['Calcium', 'Hypertensive disease '] -> ['Pain']
+Support: 0.05555555555555555
+Confidence: 0.5913978494623656
+Lift: 1.505099925366946
+=====================================
