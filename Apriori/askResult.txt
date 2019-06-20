@@ -1,10 +1,35 @@
-Rule: ['Common Cold '] -> ['Upper Respiratory Infections ']
-Support: 0.05202312138728324
-Confidence: 0.9642857142857143
-Lift: 18.535714285714285
+Rule: ['Angiotensin', 'MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME '] -> ['Female']
+Support: 0.10211946050096339
+Confidence: 0.7162162162162162
+Lift: 1.2108020072189454
 =====================================
-Rule: ['Mental Depression'] -> ['Pain']
-Support: 0.046242774566473986
-Confidence: 0.5217391304347826
-Lift: 1.6312205343111574
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Coughing'] -> ['Female']
+Support: 0.06551059730250482
+Confidence: 0.7555555555555555
+Lift: 1.2773072747014116
+=====================================
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril'] -> ['Female']
+Support: 0.10211946050096339
+Confidence: 0.7162162162162162
+Lift: 1.2108020072189454
+=====================================
+Rule: ['Angiotensin', 'MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Coughing'] -> ['Female']
+Support: 0.06358381502890173
+Confidence: 0.75
+Lift: 1.267915309446254
+=====================================
+Rule: ['Angiotensin', 'MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril'] -> ['Female']
+Support: 0.10211946050096339
+Confidence: 0.7162162162162162
+Lift: 1.2108020072189454
+=====================================
+Rule: ['MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril', 'Coughing'] -> ['Female']
+Support: 0.06358381502890173
+Confidence: 0.75
+Lift: 1.267915309446254
+=====================================
+Rule: ['Angiotensin', 'MICROCEPHALY , EPILEPSY , AND DIABETES SYNDROME ', 'Lisinopril', 'Coughing'] -> ['Female']
+Support: 0.06358381502890173
+Confidence: 0.75
+Lift: 1.267915309446254
 =====================================
